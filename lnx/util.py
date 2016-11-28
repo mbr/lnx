@@ -13,3 +13,8 @@ def sysfs_lookup_bool(path):
         return True
     else:
         raise ValueError('Cannot convert {!r} to bool in {}'.format(buf, path))
+
+
+def sysfs_lookup_int(path):
+    buf = sysfs_lookup(path)
+    return int(buf.decode('ascii'))

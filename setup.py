@@ -21,7 +21,7 @@ setup(name='lnx',
       url='https://github.com/mbr/lnx',
       license='MIT',
       packages=find_packages(exclude=['tests']),
-      install_requires=[],
+      install_requires=['datasize'],
       classifiers=[
           'Programming Language :: Python :: 3',
       ])

@@ -1,8 +1,8 @@
 import os
 from stat import S_IFBLK
 
-from .size import ByteSize
-from .util import sysfs_lookup, sysfs_lookup_bool
+from .size import DataSize
+from .util import sysfs_lookup, sysfs_lookup_bool, sysfs_lookup_int
 
 
 class Device(object):
@@ -34,13 +34,17 @@ class Device(object):
     def _lookup_sys_bool(self, name):
         return sysfs_lookup_bool(os.path.join(self.sys_fs_path, name))
 
+    def _lookup_sys_int(self, name):
+        return sysfs_lookup_int(os.path.join(self.sys_fs_path, name))
+
     @property
     def removable(self):
         return self._lookup_sys_bool('removable')
 
     @property
     def size(self):
-        return ByteSize(int(self._lookup_sys('size')) * 512)
+        sectors = self._lookup_sys_int('size')
+        return DataSize(sectors * 512)
 
     @property
     def model(self):
