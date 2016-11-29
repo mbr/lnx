@@ -44,7 +44,7 @@ class BlockDevice(object):
     @property
     def size(self):
         sectors = self._lookup_sys_int('size')
-        return DataSize(sectors * 512)
+        return DataSize(str(sectors * 512))
 
     @property
     def model(self):
