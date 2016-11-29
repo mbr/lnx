@@ -60,6 +60,9 @@ class Device(object):
     def __repr__(self):
         return '{0.__class__.__name__}({0.path})'.format(self)
 
+    def __str__(self):
+        return '<Device {!r}>'.format(self.path)
+
     @classmethod
     def iter_block_devices(cls, base_path='/dev'):
         for name in os.listdir(base_path):
