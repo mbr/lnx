@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+import os
 
 from .mount import mount, umount
 
