@@ -5,7 +5,7 @@ from datasize import DataSize
 from .util import sysfs_lookup, sysfs_lookup_bool, sysfs_lookup_int
 
 
-class Device(object):
+class BlockDevice(object):
     def __init__(self, path):
         # strip all symbolic links and make path absolute (for /proc/mounts)
         self.path = os.path.abspath(os.path.realpath(path))
