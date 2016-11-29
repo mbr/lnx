@@ -4,13 +4,13 @@ import os
 from .mount import mount, umount
 
 
-def setup_chroot(chroot, proc='/proc', sys='/sys', dev='/dev'):
+def setup_chroot(chroot, proc=True, sys='/sys', dev='/dev'):
     if proc:
-        mount(type='proc', source=proc, target=os.path.join(chroot, 'proc'))
+        mount('proc', target=os.path.join(chroot, 'proc'), type='proc')
     if sys:
-        mount(rbind=True, source=sys, target=os.path.join(chroot, 'sys'))
+        mount(sys, os.path.join(chroot, 'sys'), rbind=True)
     if dev:
-        mount(rbind=True, source=dev, target=os.path.join(chroot, 'dev'))
+        mount(dev, os.path.join(chroot, 'dev'), rbind=True)
 
 
 def deconfigure_chroot(chroot, proc=True, sys=True, dev=True):

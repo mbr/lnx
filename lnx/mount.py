@@ -1,8 +1,8 @@
 import subprocess
 
 
-def mount(source=None,
-          target=None,
+def mount(fst,
+          snd=None,
           type=None,
           options=[],
           mount='mount',
@@ -20,13 +20,13 @@ def mount(source=None,
     if type is not None:
         args.extend(('-t', type))
 
-    if source:
-        args.extend(('--source', source))
-    if target:
-        args.extend(('--target', target))
-
     if options:
         args.extend(('-o', ','.join(options)))
+
+    args.append(fst)
+
+    if snd:
+        args.append(snd)
 
     return subprocess.check_call(args)
 
