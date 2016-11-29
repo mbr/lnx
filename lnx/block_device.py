@@ -4,6 +4,14 @@ from stat import S_IFBLK
 from datasize import DataSize
 from .util import sysfs_lookup, sysfs_lookup_bool, sysfs_lookup_int
 
+def _write_zeros(dev, num):
+    ZEROS = (b'\0') * 4096
+
+    while num > 0:
+        l = min(num, len(ZEROS))
+        dev.write(ZEROS[:l])
+        num -= l
+
 
 class BlockDevice(object):
     def __init__(self, path):
