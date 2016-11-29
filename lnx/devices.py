@@ -1,7 +1,7 @@
 import os
 from stat import S_IFBLK
 
-from .size import DataSize
+from datasize import DataSize
 from .util import sysfs_lookup, sysfs_lookup_bool, sysfs_lookup_int
 
 
