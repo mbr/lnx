@@ -4,6 +4,9 @@ from stat import S_IFBLK
 from datasize import DataSize
 from .util import sysfs_lookup, sysfs_lookup_bool, sysfs_lookup_int
 
+GPT_SIZE = 34 * 512
+
+
 def _write_zeros(dev, num):
     ZEROS = (b'\0') * 4096
 
@@ -76,3 +79,16 @@ class BlockDevice(object):
         for name in os.listdir(base_path):
             if name.startswith('sd') and len(name) == 3:
                 yield cls(os.path.join(base_path, name))
+
+    def quick_erase(self):
+        with open(self.path, 'wb') as disk:
+            # clear first 4 MB to remove mbr and any bootloader code that might
+            # lurk before start of the first partition
+            _write_zeros(disk, 4 * 1024 * 1014)
+
+            # ensure gpt is erased as well
+            dev.seek(0, 2)
+            disk_len = dev.tell()
+
+            dev.seek(disk_len - GPT_SIZE)
+            _write_zeros(dev, GPT_SIZE)
