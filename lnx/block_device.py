@@ -90,8 +90,8 @@ class BlockDevice(object):
             _write_zeros(disk, 4 * 1024 * 1014)
 
             # ensure gpt is erased as well
-            dev.seek(0, 2)
-            disk_len = dev.tell()
+            disk.seek(0, 2)
+            disk_len = disk.tell()
 
-            dev.seek(disk_len - GPT_SIZE)
-            _write_zeros(dev, GPT_SIZE)
+            disk.seek(disk_len - GPT_SIZE)
+            _write_zeros(disk, GPT_SIZE)
