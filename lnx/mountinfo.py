@@ -32,3 +32,6 @@ class MountInfo(object):
     def iter_mountinfos(cls):
         for line in open(cls.PROC_INFO):
             yield cls(line)
+
+    def __str__(self):
+        return 'MountInfo<{!r} on {!r}>'.format(self.source, self.mount_point)
