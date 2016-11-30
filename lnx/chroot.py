@@ -6,7 +6,7 @@ from .mount import mount, umount
 
 def setup_chroot(chroot, proc=True, sys='/sys', dev='/dev'):
     if proc:
-        mount('proc', target=os.path.join(chroot, 'proc'), type='proc')
+        mount('proc', os.path.join(chroot, 'proc'), type='proc')
     if sys:
         mount(sys, os.path.join(chroot, 'sys'), rbind=True)
     if dev:
