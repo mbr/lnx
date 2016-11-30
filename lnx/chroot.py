@@ -15,11 +15,11 @@ def setup_chroot(chroot, proc=True, sys='/sys', dev='/dev'):
 
 def deconfigure_chroot(chroot, proc=True, sys=True, dev=True):
     if proc:
-        umount(os.path.join(chroot, 'proc'))
+        umount(os.path.join(chroot, 'proc'), lazy=True)
     if sys:
-        umount(os.path.join(chroot, 'sys'))
+        umount(os.path.join(chroot, 'sys'), lazy=True)
     if dev:
-        umount(os.path.join(chroot, 'dev'))
+        umount(os.path.join(chroot, 'dev'), lazy=True)
 
 
 @contextmanager

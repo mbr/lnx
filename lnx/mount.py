@@ -31,7 +31,7 @@ def mount(fst,
     return subprocess.check_call(args)
 
 
-def umount(target, types=None, force=False, read_only=False):
+def umount(target, types=None, force=False, lazy=False, read_only=False):
     args = ['umount']
 
     if types:
@@ -42,6 +42,9 @@ def umount(target, types=None, force=False, read_only=False):
 
     if read_only:
         args.append('-r')
+
+    if lazy:
+        args.append('-l')
 
     args.append(target)
 
