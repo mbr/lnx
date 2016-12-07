@@ -1,5 +1,6 @@
 from lnx.mbr import CHSAddress
 
+# source: https://en.wikipedia.org/wiki/Logical_block_addressing
 LBA_CHS_REF = [(0, (0, 0, 1)),
                (1, (0, 0, 2)),
                (2, (0, 0, 3)),
