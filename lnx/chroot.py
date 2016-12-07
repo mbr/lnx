@@ -13,7 +13,7 @@ def setup_chroot(chroot, proc=True, sys='/sys', dev='/dev'):
         mount(dev, os.path.join(chroot, 'dev'), bind=True)
 
 
-def deconfigure_chroot(chroot, proc=True, sys=True, dev=True):
+def teardown_chroot(chroot, proc=True, sys=True, dev=True):
     if dev:
         umount(os.path.join(chroot, 'dev'), lazy=True)
     if sys:
@@ -26,4 +26,4 @@ def deconfigure_chroot(chroot, proc=True, sys=True, dev=True):
 def chroot_binds(chroot, proc='/proc', sys='/sys', dev='/dev'):
     setup_chroot(chroot, proc, sys, dev)
     yield
-    deconfigure_chroot(chroot, proc, sys, dev)
+    teardown_chroot(chroot, proc, sys, dev)
