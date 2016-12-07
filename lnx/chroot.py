@@ -10,7 +10,7 @@ def setup_chroot(chroot, proc=True, sys='/sys', dev='/dev'):
     if sys:
         mount('sys', os.path.join(chroot, 'sys'), type='sysfs')
     if dev:
-        mount(dev, os.path.join(chroot, 'dev'), rbind=True)
+        mount(dev, os.path.join(chroot, 'dev'), bind=True)
 
 
 def deconfigure_chroot(chroot, proc=True, sys=True, dev=True):
