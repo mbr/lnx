@@ -8,7 +8,7 @@ def setup_chroot(chroot, proc=True, sys='/sys', dev='/dev'):
     if proc:
         mount('proc', os.path.join(chroot, 'proc'), type='proc')
     if sys:
-        mount(sys, os.path.join(chroot, 'sys'), rbind=True)
+        mount('sys', os.path.join(chroot, 'sys'), type='sysfs')
     if dev:
         mount(dev, os.path.join(chroot, 'dev'), rbind=True)
 
