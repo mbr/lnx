@@ -70,6 +70,11 @@ class ParttableEntry(object):
         return self._length * 512
 
     @property
+    def first_sect(self):
+        # FIXME: should check if lba is enabled?
+        return self._lba
+
+    @property
     def num_sects(self):
         return self._length
 
