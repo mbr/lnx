@@ -59,3 +59,21 @@ class ParttableEntry(object):
         entry._length = unpack(byte_order + 'L', buf[12:16])[0]
 
         return entry
+
+    @property
+    def offset(self, sect_size=512):
+        # FIXME: should check if lba is enabled?
+        return self._lba * sect_size
+
+    @classmethod
+    def read_mbr(cls, buf):
+        entries = []
+        for i in range(446, 446 + 4 * 16, 16):
+            part = buf[i:i + 16]
+
+            try:
+                entries.append(cls.from_raw(part))
+            except ValueError:
+                entries.append(None)
+
+        return entries
