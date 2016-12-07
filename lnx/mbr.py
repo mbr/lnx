@@ -92,5 +92,5 @@ class ParttableEntry(object):
         return entries
 
     def __str__(self):
-        return '<ParttableEntry. offset (bytes): {} length (bytes): {}'.format(
+        return '<ParttableEntry: Offset (bytes): {}, length (bytes): {}>'.format(
             self.offset, self.length)
