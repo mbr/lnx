@@ -61,9 +61,17 @@ class ParttableEntry(object):
         return entry
 
     @property
-    def offset(self, sect_size=512):
+    def offset(self):
         # FIXME: should check if lba is enabled?
-        return self._lba * sect_size
+        return self._lba * 512
+
+    @property
+    def length(self):
+        return self._length * 512
+
+    @property
+    def num_sects(self):
+        return self._length
 
     @classmethod
     def read_mbr(cls, buf):
@@ -77,3 +85,7 @@ class ParttableEntry(object):
                 entries.append(None)
 
         return entries
+
+    def __str__(self):
+        return '<ParttableEntry. offset (bytes): {} length (bytes): {}'.format(
+            self.offset, self.length)
