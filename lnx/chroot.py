@@ -25,5 +25,7 @@ def teardown_chroot(chroot, proc=True, sys=True, dev=True):
 @contextmanager
 def chroot_binds(chroot, proc='/proc', sys='/sys', dev='/dev'):
     setup_chroot(chroot, proc, sys, dev)
-    yield
-    teardown_chroot(chroot, proc, sys, dev)
+    try:
+        yield
+    finally:
+        teardown_chroot(chroot, proc, sys, dev)
