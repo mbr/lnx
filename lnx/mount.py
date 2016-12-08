@@ -53,9 +53,9 @@ def umount(target, types=None, force=False, lazy=False, read_only=False):
 
 
 @contextmanager
-def mounted(fst, *args, **kwargs):
-    mount(fst, *args, **kwargs)
+def mounted(fst, snd=None, *args, **kwargs):
+    mount(fst, snd, *args, **kwargs)
     try:
         yield
     finally:
-        umount(fst)
+        umount(snd if snd else fst)
