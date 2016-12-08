@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 import subprocess
 
 
@@ -49,3 +50,12 @@ def umount(target, types=None, force=False, lazy=False, read_only=False):
     args.append(target)
 
     return subprocess.check_call(args)
+
+
+@contextmanager
+def mounted(fst, *args, **kwargs):
+    mount(fst, *args, **kwargs)
+    try:
+        yield
+    finally:
+        umount(fst)
